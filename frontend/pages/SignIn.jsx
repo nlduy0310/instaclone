@@ -1,11 +1,34 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import {
+	validateEmail,
+	validatePhoneNumber,
+	validateUsername,
+	validatePassword,
+} from '../helpers/formValidators';
+import useDebounce from '../hooks/useDebounce';
 const SignIn = () => {
 	const [loginCreds, setLoginCreds] = useState({
 		firstCred: '',
 		password: '',
 	});
+
+	const [credValidity, setCredValidity] = useState({
+		firstCred: false,
+		password: false,
+	});
+
+	const debouncedCreds = useDebounce(loginCreds, 500);
+
+	useEffect(() => {
+		setCredValidity({
+			firstCred:
+				validateEmail(debouncedCreds.firstCred) ||
+				validatePhoneNumber(debouncedCreds.firstCred) ||
+				validateUsername(debouncedCreds.firstCred),
+			password: validatePassword(debouncedCreds.password),
+		});
+	}, [debouncedCreds]);
 
 	const handleInputChange = ({ target }) => {
 		setLoginCreds((prevLoginCreds) => ({
@@ -21,7 +44,11 @@ const SignIn = () => {
 					<img className="w-44 h-auto mx-auto mt-4 mb-6" src="/instaclone-black.png" />
 					<form className="flex flex-col gap-2 text-xs">
 						<input
-							className="w-64 border-[1px] bg-slate-50 p-3 rounded"
+							className={`w-64 bg-slate-50 p-3 rounded ${
+								loginCreds.firstCred.length > 0 && !credValidity.firstCred
+									? 'border-red-600 border-2'
+									: 'border-[1px]'
+							}`}
 							type="text"
 							name="firstCred"
 							value={loginCreds.firstCred}
@@ -29,16 +56,29 @@ const SignIn = () => {
 							placeholder="Phone number, username, or email"
 						/>
 						<input
-							className="w-64 border-[1px] bg-slate-50 p-3 rounded "
+							className={`w-64 bg-slate-50 p-3 rounded ${
+								loginCreds.password.length > 0 && !credValidity.password
+									? 'border-red-600 border-2'
+									: 'border-[1px]'
+							}`}
 							type="password"
 							name="password"
 							value={loginCreds.password}
 							onChange={handleInputChange}
 							placeholder="Password"
 						/>
-						<div className="mt-2 bg-blue-500 text-sm text-white text-center font-bold py-2 rounded-lg cursor-pointer">
+						<button
+							type="button"
+							className={`mt-2 bg-blue-500 text-sm text-white text-center font-bold py-2 rounded-lg cursor-pointer ${
+								!credValidity.firstCred || !credValidity.password
+									? 'opacity-70 pointer-events-none'
+									: ''
+							}`}
+							disabled={!credValidity.firstCred || !credValidity.password}
+							onClick={() => console.log('Loggin in')}
+						>
 							Log in
-						</div>
+						</button>
 					</form>
 					<div className="separator flex items-center">
 						<div className="w-full h-[1px] bg-slate-200"></div>
