@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
 	validateEmail,
@@ -13,7 +13,7 @@ const SignIn = () => {
 		password: '',
 	});
 
-	const [credValidity, setCredValidity] = useState({
+	const [credsValidity, setCredsValidity] = useState({
 		firstCred: false,
 		password: false,
 	});
@@ -21,7 +21,7 @@ const SignIn = () => {
 	const debouncedCreds = useDebounce(loginCreds, 500);
 
 	useEffect(() => {
-		setCredValidity({
+		setCredsValidity({
 			firstCred:
 				validateEmail(debouncedCreds.firstCred) ||
 				validatePhoneNumber(debouncedCreds.firstCred) ||
@@ -45,7 +45,7 @@ const SignIn = () => {
 					<form className="flex flex-col gap-2 text-xs">
 						<input
 							className={`w-64 bg-slate-50 p-3 rounded ${
-								loginCreds.firstCred.length > 0 && !credValidity.firstCred
+								loginCreds.firstCred.length > 0 && !credsValidity.firstCred
 									? 'border-red-600 border-2'
 									: 'border-[1px]'
 							}`}
@@ -57,7 +57,7 @@ const SignIn = () => {
 						/>
 						<input
 							className={`w-64 bg-slate-50 p-3 rounded ${
-								loginCreds.password.length > 0 && !credValidity.password
+								loginCreds.password.length > 0 && !credsValidity.password
 									? 'border-red-600 border-2'
 									: 'border-[1px]'
 							}`}
@@ -70,11 +70,11 @@ const SignIn = () => {
 						<button
 							type="button"
 							className={`mt-2 bg-blue-500 text-sm text-white text-center font-bold py-2 rounded-lg cursor-pointer ${
-								!credValidity.firstCred || !credValidity.password
+								!credsValidity.firstCred || !credsValidity.password
 									? 'opacity-70 pointer-events-none'
 									: ''
 							}`}
-							disabled={!credValidity.firstCred || !credValidity.password}
+							disabled={!credsValidity.firstCred || !credsValidity.password}
 							onClick={() => console.log('Loggin in')}
 						>
 							Log in
