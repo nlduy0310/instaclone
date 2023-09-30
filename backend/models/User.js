@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
 		require: true,
 		unique: true,
 	},
+	fullname: {
+		type: String,
+		require: true,
+	},
 	phone: {
 		type: String,
 	},
@@ -18,4 +22,6 @@ const userSchema = new mongoose.Schema({
 	},
 });
 
-export default User = mongoose.Model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+export default User;

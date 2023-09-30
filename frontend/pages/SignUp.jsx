@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useDebounce from '../hooks/useDebounce';
+import axios from 'axios';
 import {
 	validateEmail,
 	validatePhoneNumber,
@@ -24,6 +25,12 @@ const SignUp = () => {
 		password: false,
 	});
 
+	const [messageBox, setMessageBox] = useState({
+		showBox: false,
+		success: true,
+		message: '',
+	});
+
 	const debouncedCreds = useDebounce(userCreds, 500);
 
 	useEffect(() => {
@@ -44,6 +51,27 @@ const SignUp = () => {
 		}));
 	};
 
+	const handleSignUp = () => {
+		axios
+			.post(`${import.meta.env.VITE_BACKEND_API_BASE_URL}/auth/register`, userCreds)
+			.then((response) => {
+				return setMessageBox({
+					showBox: true,
+					success: response.data.success,
+					message: response.data.message,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+				return setMessageBox({
+					showBox: true,
+					success: false,
+					message: 'Some error occurred, please try again!',
+				});
+			});
+	};
+
+	// TODO Add meaningful explaination about the input formats
 	return (
 		<div className="w-full h-full flex flex-col justify-center items-center">
 			<div className="flex flex-col gap-4">
@@ -101,6 +129,17 @@ const SignUp = () => {
 							onChange={handleInputChange}
 							placeholder="Password"
 						/>
+
+						{messageBox.showBox && (
+							<span
+								className={`text-center p-2 mt-2 rounded-sm ${
+									messageBox.success ? 'bg-green-500' : 'bg-red-500'
+								}`}
+							>
+								{messageBox.message}
+							</span>
+						)}
+
 						<p className="text-center text-slate-500 mt-6">
 							By signing up, you agree to our Terms, Privacy Policy and Cookies Policy
 						</p>
@@ -120,7 +159,7 @@ const SignUp = () => {
 								!credsValidity.username ||
 								!credsValidity.password
 							}
-							onClick={() => console.log('Signing up')}
+							onClick={handleSignUp}
 						>
 							Sign up
 						</button>
@@ -138,7 +177,7 @@ const SignUp = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="credit-line fixed bottom-10 text-sm text-slate-600 select-none">
+			<div className="credit-line fixed bottom-5 text-sm text-slate-600 select-none">
 				&copy; 2023 Duy Nguyen Le
 			</div>
 		</div>

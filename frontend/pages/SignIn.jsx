@@ -96,7 +96,7 @@ const SignIn = () => {
 					</Link>
 				</div>
 			</div>
-			<div className="credit-line fixed bottom-10 text-sm text-slate-600 select-none">
+			<div className="credit-line fixed bottom-5 text-sm text-slate-600 select-none">
 				&copy; 2023 Duy Nguyen Le
 			</div>
 		</div>

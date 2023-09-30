@@ -3,11 +3,19 @@ import express from 'express';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import cors from 'cors';
 
 import AuthRoutes from './routes/authRoutes.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.use(
+	cors({
+		origin: process.env.FRONTEND_APP_BASE_URL,
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	})
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

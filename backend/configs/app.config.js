@@ -1,0 +1,1 @@
+export const PWHASH_SALT_ROUNDS = 10;
