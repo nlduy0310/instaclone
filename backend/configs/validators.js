@@ -1,4 +1,4 @@
-import ExpressValidator, { body } from 'express-validator';
+import { body } from 'express-validator';
 
 const VALID_EMAIL_PATTERN = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/);
 const VALID_PHONE_PATTERN = new RegExp(/^[0-9]{10,12}$/);
@@ -31,6 +31,7 @@ export function validateFullName(fullname) {
 	return false;
 }
 
+// TODO need refactoring
 const emailOrPhoneValidator = () => {
 	return body('firstCred')
 		.exists()
@@ -38,6 +39,17 @@ const emailOrPhoneValidator = () => {
 		.trim()
 		.escape()
 		.custom((value) => validateEmail(value) || validatePhoneNumber(value));
+};
+
+const usernameOrEmailOrPhoneValidator = () => {
+	return body('firstCred')
+		.exists()
+		.isString()
+		.trim()
+		.escape()
+		.custom(
+			(value) => validateUsername(value) || validateEmail(value) || validatePhoneNumber(value)
+		);
 };
 
 const usernameValidator = () => {
@@ -70,3 +82,6 @@ export const signupValidator = () => {
 	return [emailOrPhoneValidator(), usernameValidator(), fullnameValidator(), passwordValidator()];
 };
 
+export const signinValidator = () => {
+	return [usernameOrEmailOrPhoneValidator(), passwordValidator()];
+};

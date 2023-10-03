@@ -7,6 +7,8 @@ import {
 	validatePassword,
 } from '../helpers/formValidators';
 import useDebounce from '../hooks/useDebounce';
+import axios from 'axios';
+
 const SignIn = () => {
 	const [loginCreds, setLoginCreds] = useState({
 		firstCred: '',
@@ -35,6 +37,13 @@ const SignIn = () => {
 			...prevLoginCreds,
 			[target.name]: target.value,
 		}));
+	};
+
+	const handleSignIn = () => {
+		axios
+			.post(`${import.meta.env.VITE_BACKEND_API_BASE_URL}/auth/signin`, loginCreds)
+			.then((response) => console.log(response.data))
+			.catch((err) => console.error(err.message));
 	};
 
 	return (
@@ -75,7 +84,7 @@ const SignIn = () => {
 									: ''
 							}`}
 							disabled={!credsValidity.firstCred || !credsValidity.password}
-							onClick={() => console.log('Loggin in')}
+							onClick={handleSignIn}
 						>
 							Log in
 						</button>

@@ -6,6 +6,8 @@ import MongoStore from 'connect-mongo';
 import cors from 'cors';
 
 import AuthRoutes from './routes/authRoutes.js';
+import passportConfig from './configs/passport.js';
+import passport from 'passport';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -14,6 +16,7 @@ app.use(
 	cors({
 		origin: process.env.FRONTEND_APP_BASE_URL,
 		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		credentials: true,
 	})
 );
 
@@ -33,6 +36,11 @@ app.use(
 		},
 	})
 );
+
+// * Setup passport
+//
+passportConfig();
+app.use(passport.session());
 
 app.use('/auth', AuthRoutes);
 
