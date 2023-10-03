@@ -53,30 +53,30 @@ controllers.handleLogin = (req, res, next) => {
 	}
 
 	passport.authenticate('local', (err, user, info) => {
-		console.log(info);
-		if (err) {
-			console.error(err);
-			return res.json({
-				success: false,
-				message: `An error happened: ${err.message}`,
-			});
-		}
+		if (err) return next(err);
 
-		if (!user) {
+		if (!user) return res.json(info);
+
+		req.login(user, function (err) {
+			if (err) return next(err);
 			return res.json(info);
-		}
-
-		console.log(req.user._id);
-		return res.json(info);
+		});
 	})(req, res, next);
 };
 
 controllers.handleLogout = (req, res, next) => {
-	
-}
+	req.logout(function (err) {
+		if (err) return next(err);
+		res.send('Logged out successfully');
+	});
+};
 
-controllers.sendUserData = (req, res, next) => {
-	res.send('In protected route');
+controllers.sendUserData = async (req, res, next) => {
+	// retrieve data from db
+	let data = await User.findById(req.user._id);
+	
+	return res.json(data);
+
 };
 
 export default controllers;

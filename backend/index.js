@@ -16,7 +16,6 @@ app.use(
 	cors({
 		origin: process.env.FRONTEND_APP_BASE_URL,
 		methods: ['GET', 'POST', 'PUT', 'DELETE'],
-		credentials: true,
 	})
 );
 
@@ -39,7 +38,8 @@ app.use(
 
 // * Setup passport
 //
-passportConfig();
+passportConfig(passport);
+app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', AuthRoutes);
