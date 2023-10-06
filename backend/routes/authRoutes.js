@@ -9,5 +9,6 @@ router.post('/register', signupValidator(), AuthControllers.handleRegister);
 router.post('/login', signinValidator(), AuthControllers.handleLogin);
 router.post('/logout', ensureAuthenticated, AuthControllers.handleLogout);
 router.get('/userdata', ensureAuthenticated, AuthControllers.sendUserData);
+router.get('/status', AuthControllers.getAuthStatus);
 
 export default router;

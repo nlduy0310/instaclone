@@ -67,16 +67,20 @@ controllers.handleLogin = (req, res, next) => {
 controllers.handleLogout = (req, res, next) => {
 	req.logout(function (err) {
 		if (err) return next(err);
-		res.send('Logged out successfully');
+		res.send({ success: true, message: 'Logged out successfully' });
 	});
 };
 
 controllers.sendUserData = async (req, res, next) => {
 	// retrieve data from db
 	let data = await User.findById(req.user._id);
-	
-	return res.json(data);
 
+	return res.json(data);
+};
+
+controllers.getAuthStatus = (req, res) => {
+	if (req.isAuthenticated()) return res.json({ isAuthenticated: true });
+	return res.json({ isAuthenticated: false });
 };
 
 export default controllers;

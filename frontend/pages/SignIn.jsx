@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
 	validateEmail,
 	validatePhoneNumber,
@@ -39,10 +39,24 @@ const SignIn = () => {
 		}));
 	};
 
+	const navigate = useNavigate();
 	const handleSignIn = () => {
 		axios
-			.post(`${import.meta.env.VITE_BACKEND_API_BASE_URL}/auth/signin`, loginCreds)
-			.then((response) => console.log(response.data))
+			.post('/auth/login', loginCreds)
+			.then((response) => {
+				if (!response?.data) {
+					// TODO show http error message
+					return;
+				} else {
+					const { success, message } = response.data;
+					if (success) {
+						return navigate('/');
+					} else {
+						// show error message
+						return console.error(message);
+					}
+				}
+			})
 			.catch((err) => console.error(err.message));
 	};
 
