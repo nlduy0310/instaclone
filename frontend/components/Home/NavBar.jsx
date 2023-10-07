@@ -1,17 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { MdOutlineDensityMedium } from 'react-icons/md';
-import { BiSearch, BiMessageRounded } from 'react-icons/bi';
-import { GoHome } from 'react-icons/go';
-import { RiCompassLine } from 'react-icons/ri';
-import { PiVideo } from 'react-icons/pi';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { BiSearch, BiSolidSearch, BiMessageRounded, BiSolidMessageRounded } from 'react-icons/bi';
+import { GoHome, GoHomeFill } from 'react-icons/go';
+import { RiCompassLine, RiCompassFill } from 'react-icons/ri';
+import { PiVideo, PiVideoFill } from 'react-icons/pi';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsPlusCircle } from 'react-icons/bs';
 
 import NavItem from './NavItem';
+
+const UrlToItemNameLookup = {
+	['/explore']: 'explore',
+	['/reels']: 'reels',
+	['/messages']: 'messages',
+};
+
 const NavBar = () => {
+	// handle togglings of items
+	const location = useLocation();
+	const [toggledItem, setToggledItem] = useState(() => {
+		// set toggled item on first load
+		// refactor if possible
+		let curLoc = location.pathname;
+		let curItem = 'home';
+
+		if (curLoc !== '/')
+			for (const [k, v] of Object.entries(UrlToItemNameLookup)) {
+				if (curLoc.startsWith(k)) {
+					curItem = UrlToItemNameLookup[k];
+					break;
+				}
+			}
+
+		return curItem;
+	});
+
+	const isToggled = (itemName) => {
+		return itemName === toggledItem;
+	};
+
 	return (
-		<div className="flex flex-col justify-between px-2 py-6 max-w-[12rem] w-full border-r">
+		<div className="flex flex-col justify-between px-3 py-6 max-w-[12rem] w-full border-r">
 			<div>
 				<div className="logo p-2 mb-8">
 					<Link to="/">
@@ -19,12 +49,46 @@ const NavBar = () => {
 					</Link>
 				</div>
 				<div className="nav-main flex flex-col gap-2">
-					<NavItem Icon={GoHome} text="Home" linkTo="/" />
-					<NavItem Icon={BiSearch} text="Search" />
-					<NavItem Icon={RiCompassLine} text="Explore" linkTo="/explore" />
-					<NavItem Icon={PiVideo} text="Reels" />
-					<NavItem Icon={BiMessageRounded} text="Messages" />
-					<NavItem Icon={AiOutlineHeart} text="Notifications" />
+					<NavItem
+						iconSet={[GoHome, GoHomeFill]}
+						text="Home"
+						linkTo="/"
+						toggled={isToggled('home')}
+						uiOnToggle={() => setToggledItem('home')}
+					/>
+					<NavItem
+						iconSet={[BiSearch, BiSolidSearch]}
+						text="Search"
+						toggled={isToggled('search')}
+						uiOnToggle={() => setToggledItem('search')}
+					/>
+					<NavItem
+						iconSet={[RiCompassLine, RiCompassFill]}
+						text="Explore"
+						linkTo="/explore"
+						toggled={isToggled('explore')}
+						uiOnToggle={() => setToggledItem('explore')}
+					/>
+					<NavItem
+						iconSet={[PiVideo, PiVideoFill]}
+						text="Reels"
+						linkTo="/reels"
+						toggled={isToggled('reels')}
+						uiOnToggle={() => setToggledItem('reels')}
+					/>
+					<NavItem
+						iconSet={[BiMessageRounded, BiSolidMessageRounded]}
+						text="Messages"
+						linkTo="/messages"
+						toggled={isToggled('messages')}
+						uiOnToggle={() => setToggledItem('messages')}
+					/>
+					<NavItem
+						iconSet={[AiOutlineHeart, AiFillHeart]}
+						text="Notifications"
+						toggled={isToggled('noti')}
+						uiOnToggle={() => setToggledItem('noti')}
+					/>
 					<NavItem Icon={BsPlusCircle} text="Create" />
 				</div>
 			</div>
