@@ -56,8 +56,8 @@ const Home = () => {
 		// 		<RequireLogin />
 		// 	)}
 		// </>
-		<div className="w-full h-full flex flex-row">
-			<NavBar />
+		<div className="bg-gray-200 w-full h-full text-center">
+			<h1>This is my homepage!</h1>
 		</div>
 	);
 };

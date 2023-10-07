@@ -19,9 +19,9 @@ const NavBar = () => {
 					</Link>
 				</div>
 				<div className="nav-main flex flex-col gap-2">
-					<NavItem Icon={GoHome} text="Home" />
+					<NavItem Icon={GoHome} text="Home" linkTo="/" />
 					<NavItem Icon={BiSearch} text="Search" />
-					<NavItem Icon={RiCompassLine} text="Explore" />
+					<NavItem Icon={RiCompassLine} text="Explore" linkTo="/explore" />
 					<NavItem Icon={PiVideo} text="Reels" />
 					<NavItem Icon={BiMessageRounded} text="Messages" />
 					<NavItem Icon={AiOutlineHeart} text="Notifications" />
