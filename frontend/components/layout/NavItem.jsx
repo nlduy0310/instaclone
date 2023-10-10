@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdOutlineQuestionMark } from 'react-icons/md';
+
+const ICON_SIZE = '1.6rem';
 
 const NavItem = (props) => {
 	const [hover, setHover] = useState(false);
@@ -23,16 +25,16 @@ const NavItem = (props) => {
 			<div className="icon-wrapper px-2">
 				{iconSet ? (
 					toggled ? (
-						<ToggledIcon size={'1.2rem'} />
+						<ToggledIcon size={ICON_SIZE} />
 					) : (
-						<DefaultIcon size={'1.2rem'} />
+						<DefaultIcon size={ICON_SIZE} />
 					)
 				) : (
-					<Icon size={'1.2rem'} />
+					<Icon size={ICON_SIZE} />
 				)}
 			</div>
 
-			<span className={`text-xs px-2 ${toggled ? 'font-bold' : ''}`}>{text}</span>
+			<span className={`px-2 ${toggled ? 'font-bold' : ''}`}>{text}</span>
 		</div>
 	);
 };

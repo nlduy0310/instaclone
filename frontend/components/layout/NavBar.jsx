@@ -41,14 +41,14 @@ const NavBar = () => {
 	};
 
 	return (
-		<div className="flex flex-col justify-between px-3 py-6 max-w-[12rem] w-full border-r">
+		<div className="flex flex-col justify-between px-4 py-6 w-60 shrink-0 border-r">
 			<div>
 				<div className="logo p-2 mb-8">
 					<Link to="/">
 						<img src="/instaclone-black.png" className="w-24"></img>
 					</Link>
 				</div>
-				<div className="nav-main flex flex-col gap-2">
+				<div className="nav-main flex flex-col gap-4">
 					<NavItem
 						iconSet={[GoHome, GoHomeFill]}
 						text="Home"
