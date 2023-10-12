@@ -7,6 +7,7 @@ import { RiCompassLine, RiCompassFill } from 'react-icons/ri';
 import { PiVideo, PiVideoFill } from 'react-icons/pi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsPlusCircle } from 'react-icons/bs';
+import PropTypes from 'prop-types';
 
 import NavItem from './NavItem';
 
@@ -16,7 +17,9 @@ const UrlToItemNameLookup = {
 	['/messages']: 'messages',
 };
 
-const NavBar = () => {
+const NavBar = (props) => {
+	const { className } = props;
+
 	// handle togglings of items
 	const location = useLocation();
 	const [toggledItem, setToggledItem] = useState(() => {
@@ -41,7 +44,7 @@ const NavBar = () => {
 	};
 
 	return (
-		<div className="flex flex-col justify-between px-4 py-6 w-60 shrink-0 border-r">
+		<div className={`${className} flex flex-col justify-between px-4 py-6 w-60 shrink-0 border-r`}>
 			<div>
 				<div className="logo p-2 mb-8">
 					<Link to="/">
@@ -97,6 +100,14 @@ const NavBar = () => {
 			</div>
 		</div>
 	);
+};
+
+NavBar.propTypes = {
+	className: PropTypes.string,
+};
+
+NavBar.defaultProps = {
+	className: '',
 };
 
 export default NavBar;

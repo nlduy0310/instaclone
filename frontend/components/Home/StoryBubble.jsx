@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RoundedImage from './RoundedImage';
-
-const UNSEEN_BUBBLE_GRADIENT = 'bg-gradient-to-tr from-yellow-500 to-fuchsia-600';
-const SEEN_BUBBLE_GRADIENT = 'bg-neutral-300';
+// const UNSEEN_BUBBLE_GRADIENT = 'bg-gradient-to-tr from-yellow-500 to-fuchsia-600';
+// const SEEN_BUBBLE_GRADIENT = 'bg-neutral-300';
+import { UNSEEN_BUBBLE_GRADIENT, SEEN_BUBBLE_GRADIENT } from '../../configs/themes.js';
 
 const StoryBubble = (props) => {
 	const { className, img, hasSeen, text, imageWidth, textSize } = props;

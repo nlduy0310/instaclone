@@ -4,7 +4,7 @@ import NavBar from '../layout/NavBar';
 const HomeLayout = () => {
 	return (
 		<div className="w-full h-full flex flex-row">
-			<NavBar />
+			<NavBar className="fixed top-0 bottom-0 left-0 bg-white" />
 			<Outlet />
 		</div>
 	);

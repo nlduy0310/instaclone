@@ -4,7 +4,7 @@ import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
 const StoryStack = (props) => {
-	const { data } = props;
+	const { data, className } = props;
 
 	const prevBut = useRef();
 	const nextBut = useRef();
@@ -63,7 +63,7 @@ const StoryStack = (props) => {
 	}, [pivotBubble, n]);
 
 	return (
-		<div className="relative">
+		<div className={`${className} relative`}>
 			<div className="storystack-container flex w-96 flex-row gap-4 overflow-hidden">
 				{/* REMEMBER TO SET className="flex-grow-0 flex-shrink-0 basis-auto" */}
 				{bubbles}
@@ -88,6 +88,11 @@ const StoryStack = (props) => {
 
 StoryStack.propTypes = {
 	data: PropTypes.array,
+	className: PropTypes.string
+};
+
+StoryStack.defaultProps = {
+	className: '',
 };
 
 export default StoryStack;

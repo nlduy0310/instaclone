@@ -7,7 +7,11 @@ export default {
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			width: {
+				'postimage': '28rem'
+			}
+		},
 	},
 	plugins: [],
 };

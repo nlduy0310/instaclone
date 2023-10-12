@@ -50,73 +50,73 @@ const Home = () => {
 		let data = [
 			{
 				key: 0,
-				profilePic: '/proto/lalalalisa_m.jpg',
+				profilePic: '/proto/profile/lalalalisa_m.jpg',
 				hasSeen: false,
 				username: 'lalalalisa_m',
 			},
 			{
 				key: 1,
-				profilePic: '/proto/mia.soya.jpg',
+				profilePic: '/proto/profile/mia.soya.jpg',
 				hasSeen: false,
 				username: 'mia.soya',
 			},
 			{
 				key: 2,
-				profilePic: '/proto/cloud.dokhanhvan.jpg',
+				profilePic: '/proto/profile/cloud.dokhanhvan.jpg',
 				hasSeen: false,
 				username: 'cloud.dokhanhvan',
 			},
 			{
 				key: 3,
-				profilePic: '/proto/smudge_lord.jpg',
+				profilePic: '/proto/profile/smudge_lord.jpg',
 				hasSeen: false,
 				username: 'smudge_lord',
 			},
 			{
 				key: 4,
-				profilePic: '/proto/lnavna.jpg',
+				profilePic: '/proto/profile/lnavna.jpg',
 				hasSeen: false,
 				username: 'lnavna',
 			},
 			{
 				key: 5,
-				profilePic: '/proto/jessybarden.jpg',
+				profilePic: '/proto/profile/jessybarden.jpg',
 				hasSeen: false,
 				username: 'jessybarden',
 			},
 			{
 				key: 6,
-				profilePic: '/proto/kickthepj.jpg',
+				profilePic: '/proto/profile/kickthepj.jpg',
 				hasSeen: false,
 				username: 'kickthepj',
 			},
 			{
 				key: 7,
-				profilePic: '/proto/may__lily.jpg',
+				profilePic: '/proto/profile/may__lily.jpg',
 				hasSeen: false,
 				username: 'may__lily',
 			},
 			{
 				key: 8,
-				profilePic: '/proto/ananasvn.jpg',
+				profilePic: '/proto/profile/ananasvn.jpg',
 				hasSeen: false,
 				username: 'ananasvn',
 			},
 			{
 				key: 9,
-				profilePic: '/proto/itsmarziapie.jpg',
+				profilePic: '/proto/profile/itsmarziapie.jpg',
 				hasSeen: true,
 				username: 'itsmarziapie',
 			},
 			{
 				key: 10,
-				profilePic: '/proto/billieeilish.jpg',
+				profilePic: '/proto/profile/billieeilish.jpg',
 				hasSeen: true,
 				username: 'billieeilish',
 			},
 			{
 				key: 11,
-				profilePic: '/proto/vac.closet.jpg',
+				profilePic: '/proto/profile/vac.closet.jpg',
 				hasSeen: true,
 				username: 'vac.closet',
 			},
@@ -140,7 +140,7 @@ const Home = () => {
 		// 		<RequireLogin />
 		// 	)}
 		// </>
-		<div className="bg-gray-200 w-full h-full text-center">
+		<div className="w-full h-full text-center">
 			<div className="w-fit mx-auto mt-12 flex flex-row gap-12">
 				<div className="shrink-0">
 					<StoryStack data={stories} />

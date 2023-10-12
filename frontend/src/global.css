@@ -2,7 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --heart-fill: #ff3040;
+    --bookmark-fill: #ffef00;
+}
+
 .nav-item:hover > .icon-wrapper > * {
     transform: scale(1.2);
     transition-duration: 200ms;
+}
+
+@keyframes HeartFilled {
+    0% {
+        transform: scale(1);
+        color: black;
+        fill: transparent;
+    }
+    50% {
+        transform: scale(1.25);
+        color: var(--heart-fill);
+        fill: var(--heart-fill);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        color: var(--heart-fill);
+        fill: var(--heart-fill);
+        opacity: 1;
+    }
+}
+
+.heart-filled {
+    animation: HeartFilled 300ms ease-out forwards;
+}
+
+@keyframes BookmarkFilled {
+    0% {
+        transform: scale(1);
+        color: black;
+        fill: transparent;
+    }
+
+    50% {
+        transform: scale(1.25);
+        color: var(--bookmark-fill);
+        fill: var(--bookmark-fill);
+    }
+
+    100% {
+        transform: scale(1);
+        color: var(--bookmark-fill);
+        fill: var(--bookmark-fill);
+    }
+}
+
+.bookmark-filled {
+    animation: BookmarkFilled 300ms ease-out forwards;
+}
+
+.hover\:grayout:not(.stop-grayout):hover {
+    opacity: 0.5;
 }
