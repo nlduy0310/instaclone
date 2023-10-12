@@ -44,10 +44,42 @@ const Home = () => {
 	// }
 
 	const [stories, setStories] = useState([]);
+	const [posts, setPosts] = useState([]);
+
+	async function fetchPosts() {
+		return [
+			{
+				id: 'ay5o2',
+				username: 'sontungmtp',
+				userVerified: true,
+				userImg: '/proto/profile/sontungmtp.jpg',
+				hasStories: false,
+				hasUnseenStories: true,
+				postContent: {
+					// TODO parse this information from a Date object
+					postedSince: 'Oct 11, 2023',
+					postedFor: '1d',
+					images: [
+						'/proto/posts/sontungmtp/1/1.jpg',
+						'/proto/posts/sontungmtp/1/2.jpg',
+						'/proto/posts/sontungmtp/1/3.jpg',
+						'/proto/posts/sontungmtp/1/4.jpg',
+					],
+					caption: 'Thứ tư nên cứ từ từ ... 😌',
+					likedContact: {
+						username: 'lq.haitu.jpg',
+						userImg: '/proto/posts/sontungmtp/1/liked_by/lq.haitu.jpg',
+					},
+					nLikes: 181752,
+					nComments: 1357,
+				},
+			},
+		];
+	}
 
 	useEffect(() => {
 		// load data from db
-		let data = [
+		let fetchedStories = [
 			{
 				key: 0,
 				profilePic: '/proto/profile/lalalalisa_m.jpg',
@@ -121,7 +153,8 @@ const Home = () => {
 				username: 'vac.closet',
 			},
 		];
-		setStories(data);
+		setStories(fetchedStories);
+		fetchPosts().then((res) => setPosts(res));
 	}, []);
 
 	return (
@@ -143,8 +176,8 @@ const Home = () => {
 		<div className="w-full h-full text-center">
 			<div className="w-fit mx-auto mt-12 flex flex-row gap-12">
 				<div className="shrink-0">
-					<StoryStack data={stories} />
-					<NewsFeed />
+					<StoryStack className="mb-10" data={stories} />
+					<NewsFeed data={posts} />
 				</div>
 				<div>
 					<SidePanel />

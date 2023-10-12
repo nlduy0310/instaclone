@@ -1,22 +1,40 @@
 import React from 'react';
 import RoundedImage from '../RoundedImage';
+import PropTypes from 'prop-types';
 
-const PostContent = () => {
+const PostContent = (props) => {
+	const { username, caption, nLikes, likedContact } = props;
+
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+
 	return (
 		<div>
 			<div className="flex flex-row gap-2 items-center">
-				<RoundedImage
-					className="w-4 h-4 cursor-pointer inline"
-					img="/proto/posts/sontungmtp/1/liked_by/lq.haitu.jpg"
-				/>
-				<span className="cursor-pointer text-sm font-semibold">181,752 likes</span>
+				{likedContact && (
+					<RoundedImage
+						className="w-4 h-4 cursor-pointer inline"
+						img={likedContact.userImg}
+					/>
+				)}
+				<span className="cursor-pointer text-sm font-semibold">
+					{numberWithCommas(nLikes)} likes
+				</span>
 			</div>
 			<div className="w-fit ">
-				<span className='text-sm font-semibold cursor-pointer'>sontungmtp</span>
-				<span className='text-sm ms-1'>Thứ tư nên cứ từ từ ... 😌</span>
+				<span className="text-sm font-semibold cursor-pointer">{username}</span>
+				<span className="text-sm ms-1">{caption}</span>
 			</div>
 		</div>
 	);
+};
+
+PostContent.propTypes = {
+	username: PropTypes.string.isRequired,
+	caption: PropTypes.string.isRequired,
+	nLikes: PropTypes.number.isRequired,
+	likedContact: PropTypes.object,
 };
 
 export default PostContent;

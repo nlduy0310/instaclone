@@ -2,10 +2,12 @@ import React, { useRef, useState } from 'react';
 import { PiSmileyBold } from 'react-icons/pi';
 import EmojiPicker from 'emoji-picker-react';
 import { AiOutlineClose } from 'react-icons/ai';
+import PropTypes from 'prop-types';
 
-const PostComments = () => {
+const PostComments = (props) => {
+
+	const { nComments } = props;
     const [text, setText] = useState('');
-    console.log(text);
 	const taRef = useRef();
 	const [showEmotes, setShowEmotes] = useState(false);
 
@@ -20,12 +22,16 @@ const PostComments = () => {
 
     function handleEmojiClick(emojiObj) {
         setText(prev => prev + emojiObj.emoji);
-    }
+	}
+	
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
 
 	return (
 		<div>
 			<p className="w-fit text-sm text-slate-500 mb-2 cursor-pointer">
-				View all 1,357 comments
+				View all {numberWithCommas(nComments)} comments
 			</p>
 			<form className="flex flex-row items-center mb-4">
 				<textarea
@@ -65,5 +71,13 @@ const PostComments = () => {
 		</div>
 	);
 };
+
+PostComments.propTypes = {
+	nComments: PropTypes.number
+}
+
+PostComments.defaultProps = {
+	nComments: 0
+}
 
 export default PostComments;
