@@ -9,8 +9,9 @@ export default {
 	theme: {
 		extend: {
 			width: {
-				'postimage': '28rem'
-			}
+				postimage: '28rem',
+				storystack: '38rem',
+			},
 		},
 	},
 	plugins: [],

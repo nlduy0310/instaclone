@@ -19,7 +19,7 @@ const StoryBubble = (props) => {
 	return (
 		<div className={className + ' cursor-pointer'}>
 			<RoundedImage
-				className={imageWidth}
+				className={imageWidth + ' mx-auto'}
 				img={img}
 				outlineBg={hasSeen ? SEEN_BUBBLE_GRADIENT : UNSEEN_BUBBLE_GRADIENT}
 			/>

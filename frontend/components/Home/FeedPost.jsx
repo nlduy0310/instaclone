@@ -34,7 +34,7 @@ const FeedPost = (props) => {
 				nLikes={data.postContent.nLikes}
 				likedContact={data.postContent.likedContact}
 			/>
-			<PostComments />
+			<PostComments nComments={data.postContent.nComments}/>
 		</div>
 	);
 };

@@ -175,9 +175,9 @@ const Home = () => {
 		// </>
 		<div className="w-full h-full text-center">
 			<div className="w-fit mx-auto mt-12 flex flex-row gap-12">
-				<div className="shrink-0">
-					<StoryStack className="mb-10" data={stories} />
-					<NewsFeed data={posts} />
+				<div className="shrink-0 flex flex-col items-center">
+					{(stories && stories.length > 0) && <StoryStack className="mb-10" data={stories} />}
+					{(posts && posts.length > 0) && <NewsFeed data={posts} />}
 				</div>
 				<div>
 					<SidePanel />

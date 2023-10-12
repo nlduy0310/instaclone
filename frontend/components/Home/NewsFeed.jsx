@@ -10,7 +10,7 @@ const NewsFeed = (props) => {
 	});
 
 	return (
-		<div className={`${className} feedstack flex flex-col gap-8 overflow-hidden`}>
+		<div className={`${className} feedstack w-fit flex flex-col gap-8 overflow-hidden`}>
 			{data.length === 0 ? <h1>No posts found!</h1> : feedPosts}
 		</div>
 	);
