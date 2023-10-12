@@ -2,6 +2,9 @@ import React from 'react';
 import PostHeader from './FeedPost/PostHeader';
 import PostGallery from './FeedPost/PostGallery';
 import PostActions from './FeedPost/PostActions';
+import PostContent from './FeedPost/PostContent';
+import PostComments from './FeedPost/PostComments';
+
 
 const FeedPost = () => {
 	return (
@@ -16,6 +19,9 @@ const FeedPost = () => {
 				]}
 			/>
 			<PostActions />
+			<PostContent />
+			<PostComments />
+			
 		</div>
 	);
 };
