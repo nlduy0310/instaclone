@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
@@ -8,7 +9,7 @@ import Explore from '../pages/Explore';
 import Reels from '../pages/Reels';
 import Messages from '../pages/Messages';
 
-function App() {
+function RoutesComponent() {
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -24,6 +25,10 @@ function App() {
 			</Routes>
 		</BrowserRouter>
 	);
+}
+
+function App() {
+	return <RoutesComponent />;
 }
 
 export default App;

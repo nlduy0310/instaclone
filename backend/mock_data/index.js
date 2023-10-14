@@ -1,2 +1,2 @@
-export * as mockStories from './stories.js';
-export * as mockFeedPosts from './feedPosts.js';
+export { default as mockStories } from './stories.js';
+export { default as mockFeedPosts } from './feedPosts.js';

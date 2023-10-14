@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
 import App from './App.jsx';
 import './global.css';
-import axios from 'axios';
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = import.meta.env.VITE_BACKEND_API_BASE_URL;
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<React.StrictMode>
+		<QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools />
+		</QueryClientProvider>
+	</React.StrictMode>
+);
