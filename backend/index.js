@@ -5,7 +5,10 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import cors from 'cors';
 
+// * ---------- ROUTE IMPORTS ----------
 import AuthRoutes from './routes/authRoutes.js';
+import MockRoutes from './routes/mockRoutes.js'
+
 import passportConfig from './configs/passport.js';
 import passport from 'passport';
 
@@ -44,6 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', AuthRoutes);
+app.use('/mock', MockRoutes);
 
 app.use((err, req, res, next) => {
 	console.log(err.message);
