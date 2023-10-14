@@ -2,6 +2,8 @@ import React from 'react';
 import StoryStack from '../components/Home/StoryStack';
 import NewsFeed from '../components/Home/NewsFeed';
 import SidePanel from '../components/Home/SidePanel';
+import StoryStackSkeleton from '../components/Home/StoryStackSkeleton';
+import FeedStackSkeleton from '../components/Home/FeedStackSkeleton';
 
 import { getMockStories, getMockFeedPosts } from '../api/mock.js';
 import { useQuery } from '@tanstack/react-query';
@@ -44,7 +46,7 @@ const Home = () => {
 					{/* {(stories && stories.length > 0) && <StoryStack className="mb-10" data={stories} />} */}
 					{/* {(posts && posts.length > 0) && <NewsFeed data={posts} />} */}
 					{storiesIsLoading ? (
-						<h1>Stories is loading.....</h1> // TODO add loading skeleton
+						<StoryStackSkeleton /> // TODO add loading skeleton
 					) : storiesIsError ? (
 						<h1>Failed to load stories!</h1> // TODO add error message
 					) : (
@@ -53,7 +55,7 @@ const Home = () => {
 
 					{/* // * RENDER NEWS FEED */}
 					{postsIsLoading ? (
-						<h1>Posts is loading.....</h1> // TODO add loading skeleton
+						<FeedStackSkeleton /> // TODO add loading skeleton
 					) : postsIsError ? (
 						<h1>Failed to load posts!</h1> // TODO add error message
 					) : (

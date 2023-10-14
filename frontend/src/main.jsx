@@ -5,14 +5,15 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from './App.jsx';
 import './global.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
-            <App />
-            <ReactQueryDevtools />
+			<App />
+			<ReactQueryDevtools />
 		</QueryClientProvider>
 	</React.StrictMode>
 );
